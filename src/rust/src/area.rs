@@ -4,21 +4,39 @@ use extendr_api::prelude::*;
 #[extendr]
 fn area_km2_(x: List) -> Doubles {
     x.into_iter()
-        .map(|(_, x)| Rfloat::from(<&H3>::try_from(&x).unwrap().index.area_km2()))
+        .map(|(_, x)| {
+            let cell = <&H3>::try_from(&x);
+            match cell {
+                Ok(v) => Rfloat::from(v.index.area_km2()),
+                Err(_) => Rfloat::na(),
+            }
+        })
         .collect::<Doubles>()
 }
 
 #[extendr]
 fn area_m2_(x: List) -> Doubles {
     x.into_iter()
-        .map(|(_, x)| Rfloat::from(<&H3>::try_from(&x).unwrap().index.area_m2()))
+        .map(|(_, x)| {
+            let cell = <&H3>::try_from(&x);
+            match cell {
+                Ok(v) => Rfloat::from(v.index.area_m2()),
+                Err(_) => Rfloat::na(),
+            }
+        })
         .collect::<Doubles>()
 }
 
 #[extendr]
 fn area_rads2_(x: List) -> Doubles {
     x.into_iter()
-        .map(|(_, x)| Rfloat::from(<&H3>::try_from(&x).unwrap().index.area_rads2()))
+        .map(|(_, x)| {
+            let cell = <&H3>::try_from(&x);
+            match cell {
+                Ok(v) => Rfloat::from(v.index.area_rads2()),
+                Err(_) => Rfloat::na(),
+            }
+        })
         .collect::<Doubles>()
 }
 
